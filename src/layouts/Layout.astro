@@ -28,7 +28,15 @@ const { title } = Astro.props;
           <a href="#features">Features</a>
           <a href="#demo">Demo</a>
           <a href="#hidden">Under the Surface</a>
-          <a href="https://github.com/mcittkmims/extension" class="nav-btn" target="_blank" rel="noopener">Get Extension</a>
+          <a
+            href="https://github.com/mcittkmims/extension/releases/latest"
+            class="nav-btn"
+            target="_blank"
+            rel="noopener"
+            data-get-extension
+          >
+            Get Extension
+          </a>
         </div>
       </div>
     </nav>
@@ -41,6 +49,48 @@ const { title } = Astro.props;
         <a href="https://github.com/mcittkmims/extension" target="_blank" rel="noopener">GitHub</a>
       </div>
     </footer>
+
+    <script>
+      const releaseApi = "https://api.github.com/repos/mcittkmims/extension/releases/latest";
+      const fallbackUrl = "https://github.com/mcittkmims/extension/releases/latest";
+      const links = document.querySelectorAll("[data-get-extension]");
+
+      const preferredAsset = (assets) => {
+        if (!Array.isArray(assets) || assets.length === 0) return null;
+        const scored = assets.map((asset) => {
+          const name = String(asset?.name ?? "").toLowerCase();
+          let score = 0;
+          if (name.endsWith(".xpi")) score = 4;
+          else if (name.endsWith(".zip")) score = 3;
+          else if (name.endsWith(".crx")) score = 2;
+          else score = 1;
+          return { asset, score };
+        });
+        scored.sort((a, b) => b.score - a.score);
+        return scored[0]?.asset ?? null;
+      };
+
+      const applyDownloadLink = async () => {
+        try {
+          const response = await fetch(releaseApi, { headers: { Accept: "application/vnd.github+json" } });
+          if (!response.ok) return;
+
+          const release = await response.json();
+          const asset = preferredAsset(release?.assets);
+          const href = asset?.browser_download_url || fallbackUrl;
+          const title = asset?.name ? `Download ${asset.name}` : "Download latest extension release";
+
+          links.forEach((link) => {
+            link.setAttribute("href", href);
+            link.setAttribute("title", title);
+          });
+        } catch {
+          // Keep fallback URL if GitHub API is unavailable.
+        }
+      };
+
+      applyDownloadLink();
+    </script>
   </body>
 </html>
 
