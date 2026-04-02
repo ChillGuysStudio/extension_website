@@ -31,6 +31,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
