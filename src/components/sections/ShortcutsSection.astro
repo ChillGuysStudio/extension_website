@@ -1,0 +1,192 @@
+---
+---
+
+<section class="section" id="shortcuts">
+  <div class="section-inner">
+    <p class="section-label">Keyboard &amp; commands</p>
+    <h2 class="section-title">Operate without touching the mouse</h2>
+    <p class="section-desc-sm">
+      Three shortcuts cover every mode. A slash command resets context when a conversation gets stale.
+    </p>
+
+    <div class="shortcuts-layout">
+      <div class="shortcut-list">
+
+        <div class="shortcut-row">
+          <div class="shortcut-keys">
+            <kbd>Alt</kbd><span class="plus">+</span><kbd>C</kbd>
+          </div>
+          <div class="shortcut-info">
+            <span class="shortcut-label">Toggle chat</span>
+            <span class="shortcut-desc">Opens or closes the floating chat window without clicking the button.</span>
+          </div>
+        </div>
+
+        <div class="shortcut-row">
+          <div class="shortcut-keys">
+            <kbd>Alt</kbd><span class="plus">+</span><kbd>Q</kbd>
+          </div>
+          <div class="shortcut-info">
+            <span class="shortcut-label">Screenshot quiz</span>
+            <span class="shortcut-desc">Captures the visible page and sends it to the AI. Returns the answer in the exact format the question expects — letter, number, or short text.</span>
+          </div>
+        </div>
+
+        <div class="shortcut-row">
+          <div class="shortcut-keys">
+            <kbd>Alt</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>Q</kbd>
+          </div>
+          <div class="shortcut-info">
+            <span class="shortcut-label">Autofill quiz</span>
+            <span class="shortcut-desc">Reads the page HTML directly. Detects radio buttons, checkboxes, dropdowns, and text inputs, then fills the correct answers into each field.</span>
+          </div>
+        </div>
+
+        <div class="shortcut-row shortcut-row-cmd">
+          <div class="shortcut-keys">
+            <span class="shortcut-slash">/reset</span>
+          </div>
+          <div class="shortcut-info">
+            <span class="shortcut-label">Clear conversation</span>
+            <span class="shortcut-desc">Wipes the full message history and resets the AI context. Type it in the chat input and press Enter.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="shortcut-note">
+        <div class="note-inner">
+          <p class="note-title">No modifier conflicts</p>
+          <p class="note-body">All shortcuts explicitly exclude <kbd class="note-kbd">Ctrl</kbd> and <kbd class="note-kbd">⌘</kbd> to avoid clashing with browser and OS bindings. They fire on keydown and are suppressed when focus is inside a text field.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .shortcuts-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .shortcut-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .shortcut-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 16px 0;
+    border-bottom: 1px solid #f4f4f5;
+  }
+
+  .shortcut-row:last-child {
+    border-bottom: none;
+  }
+
+  .shortcut-keys {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  kbd {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 11px;
+    background: #f4f4f5;
+    border: 1px solid #d4d4d8;
+    border-bottom-width: 2px;
+    color: #3f3f46;
+    padding: 3px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+
+  .plus {
+    font-size: 11px;
+    color: #a1a1aa;
+  }
+
+  .shortcut-slash {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 12px;
+    background: #18181b;
+    color: #d4d4d8;
+    padding: 3px 10px;
+    border-radius: 5px;
+  }
+
+  .shortcut-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .shortcut-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+  }
+
+  .shortcut-desc {
+    font-size: 13px;
+    color: #71717a;
+    line-height: 1.6;
+  }
+
+  /* Note card */
+  .shortcut-note {
+    position: sticky;
+    top: 80px;
+  }
+
+  .note-inner {
+    background: #fafafa;
+    border: 1px solid #e4e4e7;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .note-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #18181b;
+    margin-bottom: 10px;
+  }
+
+  .note-body {
+    font-size: 12px;
+    color: #71717a;
+    line-height: 1.7;
+  }
+
+  .note-kbd {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 10px;
+    background: #f4f4f5;
+    border: 1px solid #d4d4d8;
+    border-bottom-width: 2px;
+    color: #52525b;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 960px) {
+    .shortcuts-layout { grid-template-columns: 1fr; }
+    .shortcut-note { position: static; }
+    .shortcut-row { grid-template-columns: 160px 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .shortcut-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>

@@ -1,0 +1,404 @@
+---
+---
+
+<section class="section section-alt" id="showcase">
+  <div class="section-inner">
+    <p class="section-label">Feature demos</p>
+    <h2 class="section-title">More of what it can do</h2>
+    <p class="section-desc-sm">
+      Interactive previews of three other capabilities — quiz answering, rich response rendering,
+      and form autofill.
+    </p>
+
+    <div class="showcase-grid">
+
+      <!-- ── Demo 1: Quiz Auto-Answer ───────────────────────────────────── -->
+      <div class="sc-card">
+        <div class="sc-card-header">
+          <span class="sc-kbd">Alt+Q</span>
+          <span class="sc-card-title">Quiz Auto-Answer</span>
+        </div>
+        <div class="sc-body">
+          <p class="sc-question">Which sorting algorithm has an average-case complexity of O(n log n)?</p>
+          <div class="sc-options" id="quiz-options">
+            <div class="sc-option" data-correct="false">A &nbsp; Bubble Sort</div>
+            <div class="sc-option" data-correct="true"  id="quiz-correct">B &nbsp; Merge Sort</div>
+            <div class="sc-option" data-correct="false">C &nbsp; Selection Sort</div>
+            <div class="sc-option" data-correct="false">D &nbsp; Insertion Sort</div>
+          </div>
+          <div class="sc-ai-reply" id="quiz-reply">
+            <span class="sc-badge">gemini-2.5-flash</span>
+            <span>Answer: <strong>B</strong></span>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <button class="sc-btn" id="quiz-run-btn">Simulate Alt+Q</button>
+          <button class="sc-btn sc-btn-ghost" id="quiz-reset-btn">Reset</button>
+        </div>
+      </div>
+
+      <!-- ── Demo 2: Markdown + LaTeX Rendering ─────────────────────────── -->
+      <div class="sc-card">
+        <div class="sc-card-header">
+          <span class="sc-card-title">Markdown &amp; LaTeX Rendering</span>
+        </div>
+        <div class="sc-body sc-body-chat">
+          <div class="sc-chat-user">Solve x² + 5x + 6 = 0 and explain the steps.</div>
+          <div class="sc-chat-bot">
+            <span class="sc-badge">claude-sonnet-4-6</span>
+            <p>Factor the quadratic:</p>
+            <div class="sc-math-block">x² + 5x + 6 = (x + 2)(x + 3) = 0</div>
+            <p>Setting each factor to zero:</p>
+            <pre class="sc-code">x + 2 = 0  →  x = −2
+x + 3 = 0  →  x = −3</pre>
+            <p>Solutions: <strong>x = −2</strong> and <strong>x = −3</strong></p>
+          </div>
+          <div class="sc-chat-user">Can you verify with the quadratic formula?</div>
+          <div class="sc-chat-bot">
+            <span class="sc-badge">claude-sonnet-4-6</span>
+            <p>Using <em>x = (−b ± √(b²−4ac)) / 2a</em> with a=1, b=5, c=6:</p>
+            <div class="sc-math-block">x = (−5 ± √(25 − 24)) / 2 = (−5 ± 1) / 2</div>
+            <p>Confirmed: <strong>x = −2</strong> and <strong>x = −3</strong> ✓</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Demo 3: Form Autofill ──────────────────────────────────────── -->
+      <div class="sc-card">
+        <div class="sc-card-header">
+          <span class="sc-kbd">Alt+Shift+Q</span>
+          <span class="sc-card-title">Form Autofill</span>
+        </div>
+        <div class="sc-body">
+          <p class="sc-question">What is the chemical symbol for gold?</p>
+          <div class="sc-radio-group" id="autofill-options">
+            <label class="sc-radio-label" id="af-a"><input type="radio" name="af" value="go" disabled> Go</label>
+            <label class="sc-radio-label" id="af-b"><input type="radio" name="af" value="gd" disabled> Gd</label>
+            <label class="sc-radio-label" id="af-c"><input type="radio" name="af" value="au" disabled> Au</label>
+            <label class="sc-radio-label" id="af-d"><input type="radio" name="af" value="ag" disabled> Ag</label>
+          </div>
+          <div class="sc-ai-reply" id="autofill-reply">
+            <span class="sc-badge">gemini-2.5-flash</span>
+            <span>Filled: <strong>Au</strong></span>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <button class="sc-btn" id="autofill-run-btn">Simulate Alt+Shift+Q</button>
+          <button class="sc-btn sc-btn-ghost" id="autofill-reset-btn">Reset</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  /* ── Quiz demo ─────────────────────────────────────────────────────── */
+  const quizRunBtn   = document.getElementById("quiz-run-btn")   as HTMLButtonElement | null;
+  const quizResetBtn = document.getElementById("quiz-reset-btn") as HTMLButtonElement | null;
+  const quizOptions  = document.getElementById("quiz-options")   as HTMLElement | null;
+  const quizReply    = document.getElementById("quiz-reply")     as HTMLElement | null;
+  const quizCorrect  = document.getElementById("quiz-correct")   as HTMLElement | null;
+
+  let quizDone = false;
+
+  quizRunBtn?.addEventListener("click", () => {
+    if (quizDone) return;
+    quizDone = true;
+    quizRunBtn.disabled = true;
+    quizOptions?.querySelectorAll(".sc-option").forEach(el => el.classList.add("sc-opt-dim"));
+    setTimeout(() => {
+      quizCorrect?.classList.add("sc-opt-correct");
+      quizCorrect?.classList.remove("sc-opt-dim");
+      quizReply?.classList.add("visible");
+    }, 600);
+  });
+
+  quizResetBtn?.addEventListener("click", () => {
+    quizDone = false;
+    if (quizRunBtn) quizRunBtn.disabled = false;
+    quizOptions?.querySelectorAll(".sc-option").forEach(el => {
+      el.classList.remove("sc-opt-dim", "sc-opt-correct");
+    });
+    quizReply?.classList.remove("visible");
+  });
+
+  /* ── Autofill demo ─────────────────────────────────────────────────── */
+  const afRunBtn   = document.getElementById("autofill-run-btn")   as HTMLButtonElement | null;
+  const afResetBtn = document.getElementById("autofill-reset-btn") as HTMLButtonElement | null;
+  const afReply    = document.getElementById("autofill-reply")     as HTMLElement | null;
+  const afAu       = document.getElementById("af-c")               as HTMLLabelElement | null;
+  const afRadio    = afAu?.querySelector("input[type=radio]")      as HTMLInputElement | null;
+
+  let afDone = false;
+
+  afRunBtn?.addEventListener("click", () => {
+    if (afDone) return;
+    afDone = true;
+    if (afRunBtn) afRunBtn.disabled = true;
+    setTimeout(() => {
+      if (afRadio) afRadio.checked = true;
+      afAu?.classList.add("sc-radio-filled");
+      afReply?.classList.add("visible");
+    }, 600);
+  });
+
+  afResetBtn?.addEventListener("click", () => {
+    afDone = false;
+    if (afRunBtn) afRunBtn.disabled = false;
+    if (afRadio) afRadio.checked = false;
+    afAu?.classList.remove("sc-radio-filled");
+    afReply?.classList.remove("visible");
+  });
+</script>
+
+<style>
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Card */
+  .sc-card {
+    border: 1px solid #e4e4e7;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e4e4e7;
+    background: #fafafa;
+  }
+
+  .sc-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #18181b;
+  }
+
+  .sc-kbd {
+    font-size: 11px;
+    font-family: ui-monospace, "SF Mono", monospace;
+    background: #f4f4f5;
+    border: 1px solid #d4d4d8;
+    color: #52525b;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* Body */
+  .sc-body {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sc-body-chat {
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 320px;
+  }
+
+  .sc-question {
+    font-size: 13px;
+    font-weight: 500;
+    color: #18181b;
+    line-height: 1.5;
+  }
+
+  /* Quiz options */
+  .sc-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sc-option {
+    font-size: 12px;
+    color: #3f3f46;
+    padding: 8px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    background: #fafafa;
+    transition: opacity 0.3s, background 0.3s, border-color 0.3s, color 0.3s;
+  }
+
+  .sc-opt-dim {
+    opacity: 0.35;
+  }
+
+  .sc-opt-correct {
+    background: #f0fdf4;
+    border-color: #86efac;
+    color: #15803d;
+    font-weight: 600;
+    opacity: 1 !important;
+  }
+
+  /* Radio group */
+  .sc-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sc-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #3f3f46;
+    padding: 8px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    background: #fafafa;
+    cursor: default;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+  }
+
+  .sc-radio-filled {
+    background: #f0fdf4;
+    border-color: #86efac;
+    color: #15803d;
+    font-weight: 600;
+  }
+
+  /* AI reply pill */
+  .sc-ai-reply {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #3f3f46;
+    padding: 8px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    background: #fafafa;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+
+  .sc-ai-reply.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Chat bubbles */
+  .sc-chat-user {
+    align-self: flex-end;
+    max-width: 80%;
+    background: #3f3f46;
+    color: #fafafa;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 10px 10px 2px 10px;
+    line-height: 1.5;
+  }
+
+  .sc-chat-bot {
+    max-width: 92%;
+    background: #fff;
+    border: 1px solid #e4e4e7;
+    font-size: 12px;
+    padding: 10px 12px;
+    border-radius: 10px 10px 10px 2px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #18181b;
+  }
+
+  .sc-math-block {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 11px;
+    background: #f4f4f5;
+    border-left: 3px solid #d4d4d8;
+    padding: 6px 10px;
+    border-radius: 0 4px 4px 0;
+    color: #3f3f46;
+  }
+
+  .sc-code {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 11px;
+    background: #18181b;
+    color: #d4d4d8;
+    padding: 8px 10px;
+    border-radius: 6px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* Badge */
+  .sc-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-family: ui-monospace, "SF Mono", monospace;
+    background: #f4f4f5;
+    border: 1px solid #e4e4e7;
+    color: #71717a;
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .sc-footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #e4e4e7;
+    background: #fafafa;
+  }
+
+  .sc-btn {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background: #18181b;
+    color: #fafafa;
+    transition: background 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .sc-btn:hover:not(:disabled) {
+    background: #3f3f46;
+  }
+
+  .sc-btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .sc-btn-ghost {
+    background: none;
+    color: #71717a;
+    border: 1px solid #e4e4e7;
+  }
+
+  .sc-btn-ghost:hover:not(:disabled) {
+    background: #f4f4f5;
+    color: #18181b;
+  }
+
+  @media (max-width: 960px) {
+    .showcase-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+---
+
+<section class="section section-dark" id="mechanics">
+  <div class="section-inner">
+    <p class="section-label section-label-light">Hidden mechanics</p>
+    <h2 class="section-title section-title-light">Nothing is what it looks like</h2>
+    <p class="section-desc-light">
+      Two controls appear to be standard clipboard utilities. They are not.
+    </p>
+
+    <div class="mechanics-grid">
+
+      <!-- Popup clear button -->
+      <div class="mechanic-card">
+        <div class="mechanic-before">
+          <div class="mock-popup-header">
+            <span class="mock-popup-title">Clipboard</span>
+            <button class="mock-trash-btn" id="mech-trash-btn" title="Clear all items">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6l-1 14H6L5 6"></path>
+                <path d="M10 11v6"></path><path d="M14 11v6"></path>
+                <path d="M9 6V4h6v2"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="mock-popup-label">Toolbar popup — looks like "clear clipboard history"</div>
+        </div>
+        <div class="mechanic-arrow">→</div>
+        <div class="mechanic-after">
+          <p class="mechanic-title">Full UI reset</p>
+          <ul class="mechanic-list">
+            <li>Clears clipboard history</li>
+            <li>Resets chat window to 320 × 480 px</li>
+            <li>Resets chat opacity to 95%</li>
+            <li>Resets button opacity to 25%</li>
+            <li>Repositions the button to the bottom-right corner</li>
+          </ul>
+          <p class="mechanic-note">Useful if the chat window has been dragged off-screen or dialed to near-invisible.</p>
+        </div>
+      </div>
+
+      <!-- Context menu entry -->
+      <div class="mechanic-card">
+        <div class="mechanic-before">
+          <div class="mock-context-menu">
+            <div class="mock-ctx-item mock-ctx-disabled">Copy</div>
+            <div class="mock-ctx-item mock-ctx-disabled">Paste</div>
+            <div class="mock-ctx-sep"></div>
+            <div class="mock-ctx-item mock-ctx-highlight">Add to clipboard</div>
+          </div>
+          <div class="mock-popup-label">Browser right-click menu — looks like a clipboard entry</div>
+        </div>
+        <div class="mechanic-arrow">→</div>
+        <div class="mechanic-after">
+          <p class="mechanic-title">Screenshot quiz trigger</p>
+          <ul class="mechanic-list">
+            <li>Sends a <code>quizScreenshot</code> message to the active tab</li>
+            <li>Captures the visible page with the screenshot API</li>
+            <li>Sends the image to the active AI provider</li>
+            <li>Returns the answer directly into the chat window</li>
+          </ul>
+          <p class="mechanic-note">Identical to Alt+Q, accessible without a keyboard.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .mechanics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .mechanic-card {
+    background: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mechanic-before {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mechanic-arrow {
+    font-size: 18px;
+    color: #52525b;
+    text-align: center;
+  }
+
+  .mechanic-after {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mechanic-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fafafa;
+  }
+
+  .mechanic-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mechanic-list li {
+    font-size: 12px;
+    color: #a1a1aa;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .mechanic-list li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: #52525b;
+  }
+
+  .mechanic-list code {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 11px;
+    background: #3f3f46;
+    color: #d4d4d8;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .mechanic-note {
+    font-size: 11px;
+    color: #71717a;
+    line-height: 1.5;
+    border-top: 1px solid #3f3f46;
+    padding-top: 10px;
+  }
+
+  /* Mock popup header */
+  .mock-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+
+  .mock-popup-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #d4d4d8;
+  }
+
+  .mock-trash-btn {
+    background: none;
+    border: 1px solid #52525b;
+    border-radius: 4px;
+    padding: 4px 7px;
+    color: #71717a;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .mock-trash-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .mock-popup-label {
+    font-size: 11px;
+    color: #52525b;
+    line-height: 1.4;
+  }
+
+  /* Mock context menu */
+  .mock-context-menu {
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 4px 0;
+    width: 180px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  .mock-ctx-item {
+    padding: 7px 14px;
+    font-size: 12px;
+    color: #d4d4d8;
+    cursor: default;
+  }
+
+  .mock-ctx-disabled {
+    color: #52525b;
+  }
+
+  .mock-ctx-sep {
+    height: 1px;
+    background: #3f3f46;
+    margin: 3px 0;
+  }
+
+  .mock-ctx-highlight {
+    background: #3f3f46;
+    color: #fafafa;
+  }
+
+  @media (max-width: 960px) {
+    .mechanics-grid { grid-template-columns: 1fr; }
+  }
+</style>

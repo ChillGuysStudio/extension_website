@@ -1,0 +1,189 @@
+---
+---
+
+<section class="section section-alt" id="providers">
+  <div class="section-inner">
+    <p class="section-label">AI providers</p>
+    <h2 class="section-title">Seven providers, one interface</h2>
+    <p class="section-desc-sm">
+      Select a provider and model from the settings panel. API keys are stored locally in browser
+      storage — nothing is proxied or logged. Switch at any time without leaving the page.
+    </p>
+
+    <div class="providers-grid">
+
+      <div class="provider-card">
+        <div class="provider-header">
+          <span class="provider-name">Google AI Studio</span>
+          <span class="provider-tag">API Key</span>
+        </div>
+        <p class="provider-desc">Direct access to Gemini models via a free-tier API key. The default provider out of the box.</p>
+        <div class="provider-models">
+          <span class="model-chip">gemini-2.5-flash</span>
+          <span class="model-chip">gemini-2.0-flash</span>
+          <span class="model-chip">gemini-1.5-pro</span>
+        </div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-header">
+          <span class="provider-name">Vertex AI</span>
+          <span class="provider-tag">API Key</span>
+        </div>
+        <p class="provider-desc">Google Cloud's enterprise Gemini endpoint. Requires a Vertex AI API token.</p>
+        <div class="provider-models">
+          <span class="model-chip">gemini-2.5-flash</span>
+          <span class="model-chip">gemini-2.0-flash</span>
+          <span class="model-chip">gemini-1.5-pro</span>
+        </div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-header">
+          <span class="provider-name">OpenAI</span>
+          <span class="provider-tag">API Key</span>
+        </div>
+        <p class="provider-desc">GPT models via the standard OpenAI chat completions API. Supports vision for image analysis.</p>
+        <div class="provider-models">
+          <span class="model-chip">gpt-4o</span>
+          <span class="model-chip">gpt-4o-mini</span>
+          <span class="model-chip">o3-mini</span>
+        </div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-header">
+          <span class="provider-name">Anthropic</span>
+          <span class="provider-tag">API Key</span>
+        </div>
+        <p class="provider-desc">Claude models with strong reasoning and long-context support. Vision-capable for image input.</p>
+        <div class="provider-models">
+          <span class="model-chip">claude-opus-4-6</span>
+          <span class="model-chip">claude-sonnet-4-6</span>
+          <span class="model-chip">claude-haiku-4-5</span>
+        </div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-header">
+          <span class="provider-name">OpenRouter</span>
+          <span class="provider-tag">API Key</span>
+        </div>
+        <p class="provider-desc">Single API key with access to hundreds of models across providers. Useful for comparing outputs.</p>
+        <div class="provider-models">
+          <span class="model-chip">any model</span>
+        </div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-header">
+          <span class="provider-name">Grok</span>
+          <span class="provider-tag">API Key</span>
+        </div>
+        <p class="provider-desc">xAI's Grok models, compatible with the OpenAI API schema. Vision support included.</p>
+        <div class="provider-models">
+          <span class="model-chip">grok-3</span>
+          <span class="model-chip">grok-3-mini</span>
+          <span class="model-chip">grok-2-vision</span>
+        </div>
+      </div>
+
+      <div class="provider-card provider-card-local">
+        <div class="provider-header">
+          <span class="provider-name">OpenCode</span>
+          <span class="provider-tag provider-tag-local">Local</span>
+        </div>
+        <p class="provider-desc">Connect to a self-hosted OpenCode server running locally or on your network. Configure the URL and optional password in settings — models are fetched dynamically.</p>
+        <div class="provider-models">
+          <span class="model-chip">dynamic from server</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .providers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  /* Make last card (OpenCode) span full row on its own if grid has leftover */
+  .provider-card-local {
+    grid-column: span 1;
+  }
+
+  .provider-card {
+    padding: 18px 20px;
+    border: 1px solid #e4e4e7;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .provider-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .provider-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+  }
+
+  .provider-tag {
+    font-size: 10px;
+    font-weight: 500;
+    background: #f4f4f5;
+    border: 1px solid #e4e4e7;
+    color: #71717a;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .provider-tag-local {
+    background: #fef9c3;
+    border-color: #fde68a;
+    color: #92400e;
+  }
+
+  .provider-desc {
+    font-size: 12px;
+    color: #71717a;
+    line-height: 1.6;
+  }
+
+  .provider-models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .model-chip {
+    font-size: 10px;
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    background: #f4f4f5;
+    color: #52525b;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #e4e4e7;
+  }
+
+  @media (max-width: 960px) {
+    .providers-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .providers-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -8,10 +8,32 @@
       Install the extension. Open the toolbar popup &mdash; it is a clipboard manager.
       Then look for the small button in the corner of any page.
     </p>
-    <a href="https://github.com/chillguysstudio/extension" class="btn-primary btn-primary-light" target="_blank" rel="noopener">View on GitHub</a>
+    <div class="cta-buttons">
+      <a href="https://github.com/chillguysstudio/extension/releases/latest" class="btn-primary btn-primary-light" data-get-extension rel="noopener">Get Extension</a>
+      <a href="https://github.com/chillguysstudio/extension" class="btn-star" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        Star on GitHub
+      </a>
+    </div>
   </div>
 </section>
 
 <style>
   .cta-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .cta-buttons { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border: 1px solid #3f3f46;
+    color: #a1a1aa;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-star:hover { border-color: #71717a; color: #fafafa; }
 </style>
