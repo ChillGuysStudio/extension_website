@@ -8,6 +8,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 640px) {
+  .demo-chat-wrapper {
+    min-height: 420px;
+  }
+}
+
 /* ─── Floating Button ───────────────────────────────────────────────────── */
 .demo-float-btn {
   all: unset;
