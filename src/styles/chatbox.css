@@ -10,7 +10,13 @@
 
 @media (max-width: 640px) {
   .demo-chat-wrapper {
-    min-height: 420px;
+    min-height: 460px;
+  }
+  .demo-chatbox {
+    max-height: 360px;
+  }
+  .dc-messages {
+    max-height: 220px;
   }
 }
 
