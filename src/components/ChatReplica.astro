@@ -76,9 +76,13 @@ import ChatInputArea from "./chat/ChatInputArea.astro";
         ? false
         : spaceAbove >= spaceBelow;
 
+    const availableSpace = goAbove ? spaceAbove : spaceBelow;
+    box.style.maxHeight = availableSpace + "px";
+
+    const constrainedH = Math.min(boxH, availableSpace);
     const chatT = goAbove
-      ? clamp(btnT - boxH - GAP, MARGIN, H - boxH - MARGIN)
-      : clamp(btnT + bh + GAP,   MARGIN, H - boxH - MARGIN);
+      ? clamp(btnT - constrainedH - GAP, MARGIN, H - constrainedH - MARGIN)
+      : clamp(btnT + bh + GAP,           MARGIN, H - constrainedH - MARGIN);
 
     const btnCX = btnL + bw / 2;
     const chatL = clamp(
@@ -94,6 +98,7 @@ import ChatInputArea from "./chat/ChatInputArea.astro";
   function init() {
     const W  = wrapper.offsetWidth;
     const H  = wrapper.offsetHeight;
+    if (H <= 0) { requestAnimationFrame(init); return; }
     const bw = btn.offsetWidth  || 20;
     const bh = btn.offsetHeight || 20;
     btn.style.position = "absolute";

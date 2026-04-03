@@ -20,6 +20,18 @@
   }
 }
 
+@media (max-width: 400px) {
+  .demo-chat-wrapper {
+    min-height: 500px;
+  }
+  .demo-chatbox {
+    max-height: 380px;
+  }
+  .dc-messages {
+    max-height: 200px;
+  }
+}
+
 /* ─── Floating Button ───────────────────────────────────────────────────── */
 .demo-float-btn {
   all: unset;
